@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# SentinX: large raw downloads stay local
+data/raw/acled/*.xlsx
+data/raw/metricshour/
+data/raw/worldbank/*.zip
+dashboard/node_modules/

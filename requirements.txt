@@ -1,0 +1,11 @@
+pandas
+openpyxl
+country_converter
+wbgapi
+scikit-learn
+xgboost
+shap
+fastapi
+uvicorn
+joblib
+matplotlib
