@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SentinX Risk Dashboard</title>
+<!-- TODO(prototype): static fallback for the Next.js dashboard (same views, no build step) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.0/plotly.min.js"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f4f3f0; --surface-1: #fcfcfb; --border: #e2e1dc;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #7a7974;
+    --grid: #e8e7e2;
+    --seq-0: #cde2fb; --seq-1: #86b6ef; --seq-2: #3987e5; --seq-3: #1c5cab; --seq-4: #0d366b;
+    --series-1: #2a78d6; --series-2: #eb6834;
+    --up: #e34948; --down: #2a78d6;  /* SHAP: raises risk / lowers risk */
+    --critical: #d03b3b; --good: #0ca30c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-0: #111110; --surface-1: #1a1a19; --border: #2e2e2b;
+      --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e86;
+      --grid: #2a2a27;
+      --seq-0: #184f95; --seq-1: #256abf; --seq-2: #3987e5; --seq-3: #86b6ef; --seq-4: #cde2fb;
+      --series-1: #3987e5; --series-2: #d95926;
+      --up: #e66767; --down: #3987e5;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #111110; --surface-1: #1a1a19; --border: #2e2e2b;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e86;
+    --grid: #2a2a27;
+    --seq-0: #184f95; --seq-1: #256abf; --seq-2: #3987e5; --seq-3: #86b6ef; --seq-4: #cde2fb;
+    --series-1: #3987e5; --series-2: #d95926;
+    --up: #e66767; --down: #3987e5;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--surface-0); color: var(--text-primary);
+         font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 20px 16px 8px; max-width: 1280px; margin: 0 auto; display: flex;
+           flex-wrap: wrap; align-items: baseline; gap: 8px 16px; }
+  h1 { font-size: 22px; margin: 0; letter-spacing: -0.01em; }
+  header p { margin: 0; color: var(--text-secondary); flex: 1 1 320px; }
+  main { max-width: 1280px; margin: 0 auto; padding: 8px 16px 32px; display: grid; gap: 16px;
+         grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+          padding: 14px 16px; min-width: 0; }
+  .card h2 { font-size: 15px; margin: 0 0 2px; }
+  .card .sub { color: var(--text-secondary); font-size: 12.5px; margin: 0 0 8px; }
+  .span-2 { grid-column: 1 / -1; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 8px; }
+  select { font: inherit; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border);
+           background: var(--surface-1); color: var(--text-primary); }
+  .kpis { display: flex; gap: 20px; flex-wrap: wrap; }
+  .kpi .v { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .kpi .l { font-size: 12px; color: var(--text-secondary); }
+  .trend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .trend-grid > div { min-width: 0; }
+  .plot { width: 100%; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; }
+  th, td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-secondary); font-weight: 500; font-size: 12px; }
+  td.num, th.num { text-align: right; }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover, tbody tr.sel { background: color-mix(in srgb, var(--series-1) 10%, transparent); }
+  .badge { display: inline-flex; gap: 4px; align-items: center; font-size: 12px; color: var(--text-primary); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .scroll { max-height: 440px; overflow: auto; }
+  .note { color: var(--text-muted); font-size: 12px; margin-top: 6px; }
+  .err { color: var(--critical); }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+    .trend-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>SentinX</h1>
+  <p>Supply-chain disruption early warning · Asia-Pacific prototype · ACLED unrest + World Bank macro → XGBoost + SHAP</p>
+</header>
+<main>
+  <section class="card">
+    <h2>Risk heat map</h2>
+    <p class="sub" id="map-sub">Fragility score (0–100), latest forecast year. Click a country to inspect it.</p>
+    <div id="map" class="plot" style="height:440px"></div>
+  </section>
+
+  <section class="card">
+    <h2>Country ranking</h2>
+    <p class="sub">Sorted by fragility score. Alert = P(disruption next year) ≥ 0.5.</p>
+    <div class="scroll"><table id="rank"><thead><tr>
+      <th>Country</th><th class="num">Score</th><th class="num">P(alert)</th><th>Alert</th>
+    </tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section class="card span-2">
+    <div class="row">
+      <h2 style="margin:0">Country view</h2>
+      <select id="country" aria-label="Country"></select>
+      <div class="kpis" id="kpis"></div>
+    </div>
+    <div class="trend-grid">
+      <div><p class="sub">Fragility score over time</p><div id="trend-score" class="plot" style="height:260px"></div></div>
+      <div><p class="sub">Civil unrest (protests + riots) per million people</p><div id="trend-unrest" class="plot" style="height:260px"></div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Score drivers</h2>
+    <p class="sub" id="drivers-sub">Top SHAP contributions for the latest year (percentage points of growth shortfall).</p>
+    <div id="drivers" class="plot" style="height:280px"></div>
+  </section>
+
+  <section class="card">
+    <h2>Model metrics</h2>
+    <p class="sub">Temporal holdout: train ≤2019 · test 2022–23. Preliminary: small sample.</p>
+    <table id="metrics"><thead><tr><th>Model</th><th class="num">Alert ROC-AUC</th><th class="num">Alert F1</th><th class="num">Score MAE</th></tr></thead><tbody></tbody></table>
+    <p class="note">Validation (2020–21) numbers in <code>/metrics</code>.</p>
+  </section>
+</main>
+
+<script>
+const API = location.protocol.startsWith("http") && location.port !== "3000" ? location.origin : "http://localhost:8000";
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const get = p => fetch(API + p).then(r => { if (!r.ok) throw new Error(`${p}: ${r.status}`); return r.json(); });
+const fmt = (v, d = 1) => v == null ? "–" : Number(v).toFixed(d);
+const NICE = {
+  unrest_per_m: "Unrest per million", fatalities_per_m: "Fatalities per million", violent_per_m: "Violent events per million",
+  riot_share: "Riot share of unrest", unrest_yoy: "Unrest YoY change", violent_events_yoy: "Violence YoY change",
+  fatalities_yoy: "Fatalities YoY change", gdp_growth: "GDP growth %", inflation: "Inflation %",
+  trade_pct_gdp: "Trade % GDP", export_growth: "Export growth %", manuf_pct_gdp: "Manufacturing % GDP",
+  fdi_pct_gdp: "FDI % GDP", log_gdp_pc: "log GDP per capita", unemployment: "Unemployment %",
+  gdp_growth_vol3: "GDP growth volatility (3y)", inflation_vol3: "Inflation volatility (3y)",
+};
+const nice = f => NICE[f] || (f.endsWith("_lag1") ? (NICE[f.slice(0, -5)] || f) + " (prev yr)" : f);
+
+let latest = [], selected = null;
+
+function baseLayout(extra = {}) {
+  return Object.assign({
+    paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+    font: { family: "system-ui, -apple-system, Segoe UI, sans-serif", size: 12, color: css("--text-secondary") },
+    margin: { l: 44, r: 12, t: 8, b: 32 },
+    hoverlabel: { bgcolor: css("--surface-1"), bordercolor: css("--border"), font: { color: css("--text-primary") } },
+    xaxis: { gridcolor: css("--grid"), zerolinecolor: css("--grid"), linecolor: css("--border"), fixedrange: true },
+    yaxis: { gridcolor: css("--grid"), zerolinecolor: css("--border"), linecolor: css("--border"), fixedrange: true },
+    showlegend: false,
+  }, extra);
+}
+const CFG = { displayModeBar: false, responsive: true };
+
+function drawMap() {
+  const scale = [0, 0.25, 0.5, 0.75, 1].map((s, i) => [s, css(`--seq-${i}`)]);
+  Plotly.react("map", [{
+    type: "choropleth", locationmode: "ISO-3",
+    locations: latest.map(d => d.iso3), z: latest.map(d => d.fragility_score),
+    text: latest.map(d => d.country), customdata: latest.map(d => [d.alert_prob, d.alert ? "ALERT" : "no alert", d.year]),
+    hovertemplate: "<b>%{text}</b><br>Fragility score %{z:.1f}<br>P(disruption) %{customdata[0]:.2f} · %{customdata[1]}<br>Forecast from %{customdata[2]}<extra></extra>",
+    zmin: 0, zmax: 100, colorscale: scale,
+    marker: { line: { color: css("--surface-1"), width: 1 } },
+    colorbar: { title: { text: "Score", side: "top" }, thickness: 10, len: 0.7, outlinewidth: 0,
+                tickfont: { color: css("--text-secondary") }, titlefont: { color: css("--text-secondary") } },
+  }], baseLayout({
+    margin: { l: 0, r: 0, t: 0, b: 0 },
+    geo: { projection: { type: "natural earth" }, lonaxis: { range: [58, 182] }, lataxis: { range: [-50, 56] },
+           showframe: false, showcoastlines: false, showland: true, landcolor: css("--grid"),
+           showcountries: true, countrycolor: css("--surface-1"), bgcolor: "rgba(0,0,0,0)", showocean: false },
+  }), CFG);
+  const el = document.getElementById("map");
+  el.removeAllListeners?.("plotly_click");
+  el.on("plotly_click", e => select(e.points[0].location));
+}
+
+function drawRank() {
+  const tb = document.querySelector("#rank tbody");
+  tb.innerHTML = latest.map(d => `<tr data-iso="${d.iso3}" class="${d.iso3 === selected ? "sel" : ""}">
+    <td>${d.country}</td><td class="num">${fmt(d.fragility_score)}</td><td class="num">${fmt(d.alert_prob, 2)}</td>
+    <td>${d.alert ? `<span class="badge"><span class="dot" style="background:var(--critical)"></span>⚠ Alert</span>`
+                  : `<span class="badge" style="color:var(--text-muted)">–</span>`}</td></tr>`).join("");
+  tb.querySelectorAll("tr").forEach(tr => tr.onclick = () => select(tr.dataset.iso));
+}
+
+async function select(iso3) {
+  selected = iso3;
+  document.getElementById("country").value = iso3;
+  drawRank();
+  const [hist, drv] = await Promise.all([get(`/risk/${iso3}/history`), get(`/risk/${iso3}/drivers`)]);
+  const h = hist.history, last = h[h.length - 1];
+  document.getElementById("kpis").innerHTML = `
+    <div class="kpi"><div class="v">${fmt(last.fragility_score)}</div><div class="l">Fragility score (${last.year})</div></div>
+    <div class="kpi"><div class="v">${fmt(last.alert_prob, 2)}</div><div class="l">P(disruption next yr)</div></div>
+    <div class="kpi"><div class="v">${last.alert ? "⚠ Alert" : "No alert"}</div><div class="l">Alert status</div></div>`;
+
+  const line = (id, key, color, title, yrange) => Plotly.react(id, [{
+    x: h.map(d => d.year), y: h.map(d => d[key]), type: "scatter", mode: "lines+markers",
+    line: { color, width: 2 }, marker: { size: 7, color, line: { color: css("--surface-1"), width: 2 } },
+    hovertemplate: `%{x}: %{y:.1f} ${title}<extra></extra>`,
+  }], baseLayout({ hovermode: "x", yaxis: { ...baseLayout().yaxis, range: yrange, rangemode: "tozero" },
+                   xaxis: { ...baseLayout().xaxis, dtick: 2 } }), CFG);
+  line("trend-score", "fragility_score", css("--series-1"), "score", [0, 100]);
+  line("trend-unrest", "unrest_per_m", css("--series-2"), "events / million");
+
+  const ds = [...drv.drivers].reverse();
+  // pad both sides so outside value labels never collide with the category labels
+  const lo = Math.min(0, ...ds.map(d => d.shap)), hi = Math.max(0, ...ds.map(d => d.shap)), pad = (hi - lo) * 0.18 || 0.5;
+  const xr = [lo < 0 ? lo - pad : 0, hi > 0 ? hi + pad : 0];
+  document.getElementById("drivers-sub").textContent =
+    `${hist.country}, ${drv.year}: top SHAP contributions (pp of growth shortfall). Red raises risk, blue lowers it.`;
+  Plotly.react("drivers", [{
+    type: "bar", orientation: "h", y: ds.map(d => nice(d.feature)), x: ds.map(d => d.shap),
+    marker: { color: ds.map(d => d.shap >= 0 ? css("--up") : css("--down")), line: { width: 0 } },
+    text: ds.map(d => (d.shap >= 0 ? "+" : "") + d.shap.toFixed(2)), textposition: "outside", cliponaxis: false,
+    textfont: { color: css("--text-secondary") },
+    customdata: ds.map(d => d.value == null ? "n/a" : d.value.toFixed(2)),
+    hovertemplate: "<b>%{y}</b><br>value %{customdata}<br>SHAP %{x:+.2f} pp<extra></extra>",
+  }], baseLayout({ margin: { l: 190, r: 48, t: 4, b: 30 }, bargap: 0.35,
+                   xaxis: { ...baseLayout().xaxis, zeroline: true, zerolinecolor: css("--text-muted"), range: xr } }), CFG);
+}
+
+function drawMetrics(m) {
+  const rows = [["Logistic / Ridge", "logistic", "ridge"], ["Random Forest", "random_forest", "random_forest"], ["XGBoost", "xgboost", "xgboost"]];
+  document.querySelector("#metrics tbody").innerHTML = rows.map(([label, c, r]) => {
+    const ct = m.classification[c].test, rt = m.regression[r].test;
+    return `<tr><td>${label}</td><td class="num">${fmt(ct.roc_auc, 2)}</td><td class="num">${fmt(ct.f1, 2)}</td><td class="num">${fmt(rt.mae, 2)}</td></tr>`;
+  }).join("");
+}
+
+async function init() {
+  try {
+    const [lat, countries, metrics] = await Promise.all([get("/risk/latest"), get("/countries"), get("/metrics")]);
+    latest = lat;
+    const sel = document.getElementById("country");
+    sel.innerHTML = countries.map(c => `<option value="${c.iso3}">${c.country}</option>`).join("");
+    sel.onchange = () => select(sel.value);
+    document.getElementById("map-sub").textContent =
+      `Fragility score (0–100) for the ${lat[0]?.year} forecast. ${lat.filter(d => d.alert).length} of ${lat.length} countries on alert. Click a country.`;
+    drawMap(); drawMetrics(metrics);
+    await select(lat[0].iso3);
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { drawMap(); select(selected); });
+  } catch (e) {
+    document.querySelector("main").insertAdjacentHTML("afterbegin",
+      `<section class="card span-2 err">Could not reach the SentinX API at ${API} (${e.message}). Start it with <code>uvicorn api.main:app</code>.</section>`);
+  }
+}
+init();
+</script>
+</body>
+</html>
