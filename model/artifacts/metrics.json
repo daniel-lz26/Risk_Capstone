@@ -1,0 +1,135 @@
+{
+  "classification": {
+    "logistic": {
+      "val": {
+        "n": 42,
+        "positives": 9,
+        "roc_auc": 0.438,
+        "pr_auc": 0.294,
+        "precision": 0.214,
+        "recall": 0.333,
+        "f1": 0.261
+      },
+      "test": {
+        "n": 46,
+        "positives": 10,
+        "roc_auc": 0.414,
+        "pr_auc": 0.195,
+        "precision": 0.158,
+        "recall": 0.3,
+        "f1": 0.207
+      }
+    },
+    "random_forest": {
+      "val": {
+        "n": 42,
+        "positives": 9,
+        "roc_auc": 0.424,
+        "pr_auc": 0.207,
+        "precision": 0.15,
+        "recall": 0.333,
+        "f1": 0.207
+      },
+      "test": {
+        "n": 46,
+        "positives": 10,
+        "roc_auc": 0.644,
+        "pr_auc": 0.315,
+        "precision": 0.25,
+        "recall": 0.6,
+        "f1": 0.353
+      }
+    },
+    "xgboost": {
+      "val": {
+        "n": 42,
+        "positives": 9,
+        "roc_auc": 0.407,
+        "pr_auc": 0.194,
+        "precision": 0.214,
+        "recall": 0.333,
+        "f1": 0.261
+      },
+      "test": {
+        "n": 46,
+        "positives": 10,
+        "roc_auc": 0.564,
+        "pr_auc": 0.274,
+        "precision": 0.261,
+        "recall": 0.6,
+        "f1": 0.364
+      }
+    }
+  },
+  "regression": {
+    "ridge": {
+      "val": {
+        "n": 42,
+        "mae": 4.668,
+        "r2": -0.221
+      },
+      "test": {
+        "n": 46,
+        "mae": 3.356,
+        "r2": -0.79
+      }
+    },
+    "random_forest": {
+      "val": {
+        "n": 42,
+        "mae": 4.717,
+        "r2": -0.174
+      },
+      "test": {
+        "n": 46,
+        "mae": 3.46,
+        "r2": -0.325
+      }
+    },
+    "xgboost": {
+      "val": {
+        "n": 42,
+        "mae": 5.015,
+        "r2": -0.286
+      },
+      "test": {
+        "n": 46,
+        "mae": 4.004,
+        "r2": -0.5
+      }
+    }
+  },
+  "split": {
+    "train": 115,
+    "val": 42,
+    "test": 46,
+    "forecast": 24
+  },
+  "features": [
+    "unrest_per_m",
+    "fatalities_per_m",
+    "violent_per_m",
+    "riot_share",
+    "unrest_yoy",
+    "violent_events_yoy",
+    "fatalities_yoy",
+    "gdp_growth",
+    "inflation",
+    "trade_pct_gdp",
+    "export_growth",
+    "manuf_pct_gdp",
+    "fdi_pct_gdp",
+    "log_gdp_pc",
+    "unemployment",
+    "gdp_growth_vol3",
+    "inflation_vol3",
+    "gdp_growth_lag1",
+    "inflation_lag1",
+    "trade_pct_gdp_lag1",
+    "export_growth_lag1",
+    "manuf_pct_gdp_lag1",
+    "fdi_pct_gdp_lag1",
+    "log_gdp_pc_lag1",
+    "unemployment_lag1"
+  ]
+}

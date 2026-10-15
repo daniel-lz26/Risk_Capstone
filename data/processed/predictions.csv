@@ -1,0 +1,258 @@
+iso3,country,year,is_forecast_row,fragility_raw_pp,fragility_score,alert_prob,alert
+AFG,Afghanistan,2017,False,1.035,10.4,0.0751,0
+AFG,Afghanistan,2018,False,0.976,9.8,0.179,0
+AFG,Afghanistan,2019,False,4.38,43.8,0.8895,1
+AFG,Afghanistan,2020,False,18.949,100.0,0.9263,1
+AFG,Afghanistan,2021,False,1.728,17.3,0.9583,1
+AFG,Afghanistan,2022,False,0.716,7.2,0.1559,0
+AFG,Afghanistan,2023,False,-0.067,0.0,0.0282,0
+AFG,Afghanistan,2024,False,0.435,4.4,0.2656,0
+AFG,Afghanistan,2025,True,6.041,60.4,0.0443,0
+AUS,Australia,2021,False,0.135,1.4,0.0179,0
+AUS,Australia,2022,False,0.658,6.6,0.0295,0
+AUS,Australia,2023,False,1.737,17.4,0.0542,0
+AUS,Australia,2024,False,1.916,19.2,0.2015,0
+AUS,Australia,2025,True,2.145,21.4,0.2066,0
+BGD,Bangladesh,2010,False,6.771,67.7,0.8999,1
+BGD,Bangladesh,2011,False,-0.112,0.0,0.015,0
+BGD,Bangladesh,2012,False,0.024,0.2,0.0117,0
+BGD,Bangladesh,2013,False,1.599,16.0,0.1796,0
+BGD,Bangladesh,2014,False,0.153,1.5,0.0441,0
+BGD,Bangladesh,2015,False,0.406,4.1,0.0469,0
+BGD,Bangladesh,2016,False,0.117,1.2,0.01,0
+BGD,Bangladesh,2017,False,0.542,5.4,0.0385,0
+BGD,Bangladesh,2018,False,0.511,5.1,0.122,0
+BGD,Bangladesh,2019,False,2.876,28.8,0.9439,1
+BGD,Bangladesh,2020,False,0.91,9.1,0.0805,0
+BGD,Bangladesh,2021,False,0.51,5.1,0.1,0
+BGD,Bangladesh,2022,False,0.578,5.8,0.0808,0
+BGD,Bangladesh,2023,False,1.928,19.3,0.9201,1
+BGD,Bangladesh,2024,False,2.172,21.7,0.1686,0
+BGD,Bangladesh,2025,True,1.25,12.5,0.1095,0
+CHN,China,2018,False,1.297,13.0,0.0326,0
+CHN,China,2019,False,2.71,27.1,0.8608,1
+CHN,China,2020,False,0.612,6.1,0.0869,0
+CHN,China,2021,False,1.09,10.9,0.017,0
+CHN,China,2022,False,0.332,3.3,0.0802,0
+CHN,China,2023,False,0.798,8.0,0.1769,0
+CHN,China,2024,False,0.882,8.8,0.1514,0
+CHN,China,2025,True,2.166,21.7,0.4598,0
+IDN,Indonesia,2015,False,0.74,7.4,0.0172,0
+IDN,Indonesia,2016,False,0.44,4.4,0.022,0
+IDN,Indonesia,2017,False,0.495,5.0,0.066,0
+IDN,Indonesia,2018,False,1.511,15.1,0.2442,0
+IDN,Indonesia,2019,False,5.15,51.5,0.9267,1
+IDN,Indonesia,2020,False,0.349,3.5,0.0291,0
+IDN,Indonesia,2021,False,0.448,4.5,0.0709,0
+IDN,Indonesia,2022,False,0.513,5.1,0.0772,0
+IDN,Indonesia,2023,False,1.132,11.3,0.11,0
+IDN,Indonesia,2024,False,0.719,7.2,0.0796,0
+IDN,Indonesia,2025,True,2.308,23.1,0.6064,1
+IND,India,2016,False,0.691,6.9,0.0087,0
+IND,India,2017,False,1.602,16.0,0.1546,0
+IND,India,2018,False,3.476,34.8,0.9655,1
+IND,India,2019,False,7.006,70.1,0.897,1
+IND,India,2020,False,0.1,1.0,0.0299,0
+IND,India,2021,False,-0.551,0.0,0.0221,0
+IND,India,2022,False,1.088,10.9,0.1224,0
+IND,India,2023,False,1.429,14.3,0.1866,0
+IND,India,2024,False,0.462,4.6,0.0371,0
+IND,India,2025,True,0.827,8.3,0.0927,0
+JPN,Japan,2018,False,0.754,7.5,0.105,0
+JPN,Japan,2019,False,3.542,35.4,0.8563,1
+JPN,Japan,2020,False,0.009,0.1,0.0292,0
+JPN,Japan,2021,False,0.287,2.9,0.0256,0
+JPN,Japan,2022,False,0.622,6.2,0.0878,0
+JPN,Japan,2023,False,1.591,15.9,0.0573,0
+JPN,Japan,2024,False,0.842,8.4,0.1743,0
+JPN,Japan,2025,True,1.5,15.0,0.0548,0
+KHM,Cambodia,2010,False,5.894,58.9,0.1408,0
+KHM,Cambodia,2011,False,-0.643,0.0,0.0033,0
+KHM,Cambodia,2012,False,-0.096,0.0,0.0038,0
+KHM,Cambodia,2013,False,0.16,1.6,0.0123,0
+KHM,Cambodia,2014,False,0.702,7.0,0.1151,0
+KHM,Cambodia,2015,False,-0.138,0.0,0.0139,0
+KHM,Cambodia,2016,False,1.154,11.5,0.0874,0
+KHM,Cambodia,2017,False,-0.131,0.0,0.0208,0
+KHM,Cambodia,2018,False,2.105,21.0,0.2397,0
+KHM,Cambodia,2019,False,9.692,96.9,0.8554,1
+KHM,Cambodia,2020,False,1.914,19.1,0.1351,0
+KHM,Cambodia,2021,False,-0.15,0.0,0.0095,0
+KHM,Cambodia,2022,False,-0.114,0.0,0.0078,0
+KHM,Cambodia,2023,False,0.2,2.0,0.0345,0
+KHM,Cambodia,2024,False,0.573,5.7,0.029,0
+KHM,Cambodia,2025,True,1.128,11.3,0.0567,0
+KOR,South Korea,2018,False,0.695,7.0,0.0216,0
+KOR,South Korea,2019,False,3.21,32.1,0.9021,1
+KOR,South Korea,2020,False,0.505,5.1,0.0894,0
+KOR,South Korea,2021,False,-0.069,0.0,0.0632,0
+KOR,South Korea,2022,False,0.746,7.5,0.021,0
+KOR,South Korea,2023,False,1.608,16.1,0.1404,0
+KOR,South Korea,2024,False,1.317,13.2,0.1145,0
+KOR,South Korea,2025,True,1.337,13.4,0.1479,0
+LAO,Laos,2011,False,-0.353,0.0,0.0204,0
+LAO,Laos,2012,False,0.582,5.8,0.0384,0
+LAO,Laos,2013,False,0.357,3.6,0.0435,0
+LAO,Laos,2014,False,0.219,2.2,0.0299,0
+LAO,Laos,2015,False,0.997,10.0,0.1321,0
+LAO,Laos,2016,False,0.601,6.0,0.1152,0
+LAO,Laos,2017,False,0.851,8.5,0.0567,0
+LAO,Laos,2018,False,0.903,9.0,0.2234,0
+LAO,Laos,2019,False,4.082,40.8,0.9397,1
+LAO,Laos,2020,False,0.719,7.2,0.2072,0
+LAO,Laos,2021,False,0.075,0.8,0.877,1
+LAO,Laos,2022,False,0.587,5.9,0.9518,1
+LAO,Laos,2023,False,0.505,5.1,0.9312,1
+LAO,Laos,2024,False,0.209,2.1,0.2575,0
+LAO,Laos,2025,True,1.011,10.1,0.8108,1
+LKA,Sri Lanka,2010,False,6.841,68.4,0.0993,0
+LKA,Sri Lanka,2011,False,0.385,3.8,0.1291,0
+LKA,Sri Lanka,2012,False,3.0,30.0,0.8998,1
+LKA,Sri Lanka,2013,False,1.578,15.8,0.1538,0
+LKA,Sri Lanka,2014,False,0.932,9.3,0.0596,0
+LKA,Sri Lanka,2015,False,1.094,10.9,0.1801,0
+LKA,Sri Lanka,2016,False,1.399,14.0,0.2184,0
+LKA,Sri Lanka,2017,False,1.693,16.9,0.2164,0
+LKA,Sri Lanka,2018,False,4.635,46.3,0.9398,1
+LKA,Sri Lanka,2019,False,5.531,55.3,0.9552,1
+LKA,Sri Lanka,2020,False,0.097,1.0,0.0223,0
+LKA,Sri Lanka,2021,False,4.15,41.5,0.8883,1
+LKA,Sri Lanka,2022,False,0.162,1.6,0.9234,1
+LKA,Sri Lanka,2023,False,-0.144,0.0,0.0969,0
+LKA,Sri Lanka,2024,False,-0.244,0.0,0.0208,0
+LKA,Sri Lanka,2025,True,0.878,8.8,0.1197,0
+MDV,Maldives,2020,False,0.504,5.0,0.0795,0
+MDV,Maldives,2021,False,-0.143,0.0,0.0275,0
+MDV,Maldives,2022,False,3.359,33.6,0.0419,0
+MDV,Maldives,2023,False,13.35,100.0,0.9019,1
+MDV,Maldives,2024,False,1.179,11.8,0.1116,0
+MDV,Maldives,2025,True,4.249,42.5,0.213,0
+MMR,Myanmar,2010,False,5.556,55.6,0.1617,0
+MMR,Myanmar,2011,False,0.88,8.8,0.0764,0
+MMR,Myanmar,2012,False,0.201,2.0,0.0173,0
+MMR,Myanmar,2013,False,0.912,9.1,0.0495,0
+MMR,Myanmar,2014,False,0.981,9.8,0.0265,0
+MMR,Myanmar,2015,False,1.428,14.3,0.0732,0
+MMR,Myanmar,2016,False,1.034,10.3,0.0757,0
+MMR,Myanmar,2017,False,0.316,3.2,0.074,0
+MMR,Myanmar,2018,False,1.4,14.0,0.1227,0
+MMR,Myanmar,2019,False,13.35,100.0,0.9058,1
+MMR,Myanmar,2020,False,10.235,100.0,0.9063,1
+MMR,Myanmar,2021,False,0.587,5.9,0.1076,0
+MMR,Myanmar,2022,False,0.379,3.8,0.1584,0
+MMR,Myanmar,2023,False,1.024,10.2,0.1529,0
+MMR,Myanmar,2024,False,2.36,23.6,0.9075,1
+MMR,Myanmar,2025,True,2.894,28.9,0.7098,1
+MNG,Mongolia,2018,False,0.219,2.2,0.019,0
+MNG,Mongolia,2019,False,8.666,86.7,0.9635,1
+MNG,Mongolia,2020,False,0.916,9.2,0.2216,0
+MNG,Mongolia,2021,False,0.748,7.5,0.958,1
+MNG,Mongolia,2022,False,-0.303,0.0,0.9347,1
+MNG,Mongolia,2023,False,0.075,0.8,0.0362,0
+MNG,Mongolia,2024,False,0.479,4.8,0.1083,0
+MNG,Mongolia,2025,True,1.258,12.6,0.3155,0
+MYS,Malaysia,2018,False,1.187,11.9,0.0489,0
+MYS,Malaysia,2019,False,6.046,60.5,0.8505,1
+MYS,Malaysia,2020,False,0.245,2.4,0.0289,0
+MYS,Malaysia,2021,False,-0.125,0.0,0.0292,0
+MYS,Malaysia,2022,False,-0.208,0.0,0.0132,0
+MYS,Malaysia,2023,False,0.795,8.0,0.0259,0
+MYS,Malaysia,2024,False,0.401,4.0,0.0277,0
+MYS,Malaysia,2025,True,3.038,30.4,0.6026,1
+NPL,Nepal,2010,False,6.933,69.3,0.288,0
+NPL,Nepal,2011,False,0.165,1.6,0.0106,0
+NPL,Nepal,2012,False,0.786,7.9,0.0245,0
+NPL,Nepal,2013,False,0.937,9.4,0.1192,0
+NPL,Nepal,2014,False,0.213,2.1,0.0282,0
+NPL,Nepal,2015,False,3.829,38.3,0.9306,1
+NPL,Nepal,2016,False,-0.037,0.0,0.0117,0
+NPL,Nepal,2017,False,0.014,0.1,0.0283,0
+NPL,Nepal,2018,False,1.028,10.3,0.146,0
+NPL,Nepal,2019,False,7.327,73.3,0.8962,1
+NPL,Nepal,2020,False,0.894,8.9,0.068,0
+NPL,Nepal,2021,False,-0.638,0.0,0.011,0
+NPL,Nepal,2022,False,0.787,7.9,0.0599,0
+NPL,Nepal,2023,False,0.806,8.1,0.1428,0
+NPL,Nepal,2024,False,0.984,9.8,0.0714,0
+NPL,Nepal,2025,True,6.405,64.1,0.4314,0
+NZL,New Zealand,2021,False,0.073,0.7,0.0377,0
+NZL,New Zealand,2022,False,1.187,11.9,0.1411,0
+NZL,New Zealand,2023,False,1.78,17.8,0.8377,1
+NZL,New Zealand,2024,False,1.336,13.4,0.1175,0
+NZL,New Zealand,2025,True,1.123,11.2,0.0938,0
+PAK,Pakistan,2010,False,6.128,61.3,0.9552,1
+PAK,Pakistan,2011,False,0.077,0.8,0.0454,0
+PAK,Pakistan,2012,False,0.691,6.9,0.1485,0
+PAK,Pakistan,2013,False,-0.031,0.0,0.0266,0
+PAK,Pakistan,2014,False,0.257,2.6,0.1681,0
+PAK,Pakistan,2015,False,0.689,6.9,0.0301,0
+PAK,Pakistan,2016,False,0.219,2.2,0.0184,0
+PAK,Pakistan,2017,False,0.642,6.4,0.1049,0
+PAK,Pakistan,2018,False,2.237,22.4,0.9138,1
+PAK,Pakistan,2019,False,4.477,44.8,0.9627,1
+PAK,Pakistan,2020,False,0.113,1.1,0.1708,0
+PAK,Pakistan,2021,False,0.489,4.9,0.926,1
+PAK,Pakistan,2022,False,2.731,27.3,0.985,1
+PAK,Pakistan,2023,False,1.047,10.5,0.9446,1
+PAK,Pakistan,2024,False,0.331,3.3,0.4052,0
+PAK,Pakistan,2025,True,2.744,27.4,0.3362,0
+PHL,Philippines,2016,False,0.816,8.2,0.0343,0
+PHL,Philippines,2017,False,1.676,16.8,0.0207,0
+PHL,Philippines,2018,False,1.141,11.4,0.1158,0
+PHL,Philippines,2019,False,12.367,100.0,0.8135,1
+PHL,Philippines,2020,False,0.536,5.4,0.0922,0
+PHL,Philippines,2021,False,-0.445,0.0,0.0287,0
+PHL,Philippines,2022,False,0.343,3.4,0.0322,0
+PHL,Philippines,2023,False,2.505,25.0,0.4371,0
+PHL,Philippines,2024,False,1.106,11.1,0.0391,0
+PHL,Philippines,2025,True,1.762,17.6,0.3118,0
+PNG,Papua New Guinea,2021,False,0.184,1.8,0.0541,0
+PNG,Papua New Guinea,2022,False,0.245,2.4,0.1287,0
+PNG,Papua New Guinea,2023,False,0.741,7.4,0.2028,0
+PNG,Papua New Guinea,2024,False,0.674,6.7,0.0998,0
+PNG,Papua New Guinea,2025,True,2.907,29.1,0.0682,0
+PRK,North Korea,2018,False,7.085,70.9,0.1059,0
+PRK,North Korea,2019,False,7.058,70.6,0.1248,0
+PRK,North Korea,2020,False,7.252,72.5,0.0566,0
+PRK,North Korea,2021,False,9.354,93.5,0.0772,0
+PRK,North Korea,2022,False,8.384,83.8,0.1397,0
+PRK,North Korea,2023,False,7.071,70.7,0.1,0
+PRK,North Korea,2024,False,6.684,66.8,0.1004,0
+PRK,North Korea,2025,True,6.967,69.7,0.1562,0
+THA,Thailand,2010,False,7.031,70.3,0.0208,0
+THA,Thailand,2011,False,0.361,3.6,0.0569,0
+THA,Thailand,2012,False,1.072,10.7,0.0217,0
+THA,Thailand,2013,False,2.156,21.6,0.0254,0
+THA,Thailand,2014,False,1.362,13.6,0.0893,0
+THA,Thailand,2015,False,0.338,3.4,0.0137,0
+THA,Thailand,2016,False,0.311,3.1,0.0402,0
+THA,Thailand,2017,False,0.582,5.8,0.0443,0
+THA,Thailand,2018,False,1.928,19.3,0.1063,0
+THA,Thailand,2019,False,6.593,65.9,0.8881,1
+THA,Thailand,2020,False,0.383,3.8,0.0088,0
+THA,Thailand,2021,False,0.441,4.4,0.0228,0
+THA,Thailand,2022,False,0.624,6.2,0.0352,0
+THA,Thailand,2023,False,1.253,12.5,0.1314,0
+THA,Thailand,2024,False,0.235,2.4,0.0292,0
+THA,Thailand,2025,True,1.398,14.0,0.313,0
+TLS,East Timor,2021,False,39.567,100.0,0.9215,1
+TLS,East Timor,2022,False,23.081,100.0,0.9138,1
+TLS,East Timor,2023,False,0.437,4.4,0.0496,0
+TLS,East Timor,2024,False,-0.359,0.0,0.04,0
+TLS,East Timor,2025,True,-0.767,0.0,0.0218,0
+VNM,Vietnam,2010,False,6.938,69.4,0.9466,1
+VNM,Vietnam,2011,False,0.782,7.8,0.1062,0
+VNM,Vietnam,2012,False,0.881,8.8,0.0669,0
+VNM,Vietnam,2013,False,-0.299,0.0,0.0373,0
+VNM,Vietnam,2014,False,0.055,0.5,0.0196,0
+VNM,Vietnam,2015,False,1.284,12.8,0.0827,0
+VNM,Vietnam,2016,False,-0.089,0.0,0.0304,0
+VNM,Vietnam,2017,False,0.086,0.9,0.0414,0
+VNM,Vietnam,2018,False,0.439,4.4,0.1185,0
+VNM,Vietnam,2019,False,2.848,28.5,0.8539,1
+VNM,Vietnam,2020,False,1.941,19.4,0.9138,1
+VNM,Vietnam,2021,False,-0.028,0.0,0.0835,0
+VNM,Vietnam,2022,False,0.637,6.4,0.0185,0
+VNM,Vietnam,2023,False,1.557,15.6,0.2216,0
+VNM,Vietnam,2024,False,0.227,2.3,0.05,0
+VNM,Vietnam,2025,True,0.889,8.9,0.1539,0
