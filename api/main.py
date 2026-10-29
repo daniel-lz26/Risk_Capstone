@@ -62,7 +62,7 @@ def risk_latest():
     return records(latest[["iso3", "country", "year", "fragility_score", "alert_prob", "alert"]]
                    .sort_values("fragility_score", ascending=False))
 
-
+# "/risk/{iso3}/history" -> /countries/{iso3}/history based off project proposal doc
 @app.get("/risk/{iso3}/history")
 def risk_history(iso3: str):
     iso3 = check_iso3(iso3)
