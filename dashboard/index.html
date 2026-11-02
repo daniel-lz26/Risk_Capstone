@@ -188,7 +188,7 @@ async function select(iso3) {
   selected = iso3;
   document.getElementById("country").value = iso3;
   drawRank();
-  const [hist, drv] = await Promise.all([get(`/risk/${iso3}/history`), get(`/risk/${iso3}/drivers`)]);
+  const [hist, drv] = await Promise.all([get(`/countries/${iso3}/history`), get(`/countries/${iso3}/attribution?top=5`)]);
   const h = hist.history, last = h[h.length - 1];
   document.getElementById("kpis").innerHTML = `
     <div class="kpi"><div class="v">${fmt(last.fragility_score)}</div><div class="l">Fragility score (${last.year})</div></div>
@@ -231,7 +231,7 @@ function drawMetrics(m) {
 
 async function init() {
   try {
-    const [lat, countries, metrics] = await Promise.all([get("/risk/latest"), get("/countries"), get("/metrics")]);
+    const [lat, countries, metrics] = await Promise.all([get("/heatmap"), get("/countries"), get("/metrics")]);
     latest = lat;
     const sel = document.getElementById("country");
     sel.innerHTML = countries.map(c => `<option value="${c.iso3}">${c.country}</option>`).join("");
