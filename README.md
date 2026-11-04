@@ -39,7 +39,7 @@ Individual pipeline steps: `python pipeline/acled_country_year.py <acled.xlsx>`,
 
 ## API
 
-`GET /health`, `/countries`, `/risk/latest`, `/risk/{iso3}/history`, `/risk/{iso3}/drivers`, `/metrics`
+`GET /health`, `/countries`, `/heatmap`, `/countries/{iso3}/history`, `/countries/{iso3}/forecast`, `/countries/{iso3}/attribution`, `/metrics`
 
 ## Known limitations / next steps
 
