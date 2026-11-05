@@ -75,5 +75,31 @@ class Attribution(BaseModel):
     units: str
     drivers: list[Driver]
 
+# schemas for requests
+# what user sends in (iso3 = country, overrides = the changes)
+class SimulateRequest(BaseModel):
+    iso3: str
+    overrides: dict[str, float] = Field(
+        description="Feature name -> new value, applied to the country's latest inputs",
+        examples=[{"inflation": 12.0, "unrest_per_m": 40.0}])
+
+# one "photo" of the results: score, chance, alert yes/no
+class ScoreSnapshot(BaseModel):
+    fragility_score: float = Field(ge=0, le=100)
+    alert_prob: float = Field(ge=0, le=1)
+    alert: bool
+
+# baseline = before photo (real numbers)
+# simulated = after photo ( with user changes)
+# drivers = "why" list
+# overrides echoes back what user changed so frontend can show what changed
+class SimulateResult(BaseModel):
+    iso3: str
+    country: str
+    year: int = Field(description="Feature year the scenario is applied to; scores forecast year + 1")
+    overrides: dict[str, float]
+    baseline: ScoreSnapshot = Field(description="Model output for the unchanged inputs")
+    simulated: ScoreSnapshot = Field(description="Model output with the overrides applied")
+    drivers: list[Driver] = Field(description="SHAP drivers of the simulated score, largest first")
 
 Metrics = dict[str, Any]  # evaluation report from model/train.py; passed through as-is
