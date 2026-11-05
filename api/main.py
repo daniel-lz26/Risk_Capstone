@@ -9,9 +9,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from api.routers import countries, overview, simulate
 
 from api.data import ROOT
-from api.routers import countries, overview
 
 app = FastAPI(title="SentinX API", version="0.2.0",
               description="Country-level supply-chain disruption risk (Asia-Pacific prototype)")
@@ -19,6 +19,7 @@ app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000", "http
                    allow_methods=["GET", "POST"], allow_headers=["*"])
 app.include_router(overview.router)
 app.include_router(countries.router)
+app.include_router(simulate.router)
 
 # static dashboard served from the same origin, so no CORS setup is needed for the demo
 DASH = ROOT / "dashboard"

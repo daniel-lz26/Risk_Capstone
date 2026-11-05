@@ -69,3 +69,34 @@ def test_latency_under_500ms(path, iso3):
     start = time.perf_counter()
     assert client.get(path.format(iso3=iso3)).status_code == 200
     assert time.perf_counter() - start < 0.5
+
+# test /simulate if it still works without  having to manually test using /docs page
+
+# "if i change nothing, do i get the same answer as /forecast?"
+def test_simulate_without_overrides_matches_forecast(iso3):
+    body = client.post("/simulate", json={"iso3": iso3, "overrides": {}}).json()
+    forecast = client.get(f"/countries/{iso3}/forecast").json()
+    assert body["simulated"] == body["baseline"]
+    assert body["baseline"]["fragility_score"] == pytest.approx(forecast["fragility_score"], abs=0.1)
+    assert body["baseline"]["alert_prob"] == pytest.approx(forecast["alert_prob"], abs=1e-3)
+
+# "if i set inflation to 40, does it actually use 40?"
+def test_simulate_override_changes_inputs(iso3):
+    body = client.post("/simulate", json={"iso3": iso3, "overrides": {"inflation": 40.0}}).json()
+    assert body["overrides"] == {"inflation": 40.0}
+    assert next(d for d in body["drivers"] if d["feature"] == "inflation")["value"] == 40.0
+
+# "does a typo get rejected?"
+def test_simulate_unknown_feature_422(iso3):
+    assert client.post("/simulate", json={"iso3": iso3, "overrides": {"not_a_feature": 1}}).status_code == 422
+
+# "does a fake country get rejected?"
+def test_simulate_unknown_country_404():
+    assert client.post("/simulate", json={"iso3": "XXX", "overrides": {}}).status_code == 404
+
+# "is it fast enough?" (proposal speed rule)
+def test_simulate_latency_under_500ms(iso3):
+    client.post("/simulate", json={"iso3": iso3, "overrides": {}})  # warm-up: first call loads the models
+    start = time.perf_counter()
+    assert client.post("/simulate", json={"iso3": iso3, "overrides": {"gdp_growth": -5.0}}).status_code == 200
+    assert time.perf_counter() - start < 0.5
