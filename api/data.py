@@ -56,6 +56,16 @@ class Store:
 
     def history(self, iso3: str) -> pd.DataFrame:
         return self.history_table[self.history_table["iso3"] == iso3].sort_values("year")
+    
+    def feature_row(self, iso3: str) -> tuple[int, pd.DataFrame]:
+        """The model inputs for the country's forecast row (one-row DataFrame), plus its year."""
+        # finds which year is this country's latest
+        year = int(self.latest(1).set_index("iso3").loc[iso3, "year"])
+        # picks out that one country-year row 
+        # self.features keeps only 25 columns the model knows about (table has ~50)
+        row = self.table[(self.table["iso3"] == iso3) & (self.table["year"] == year)][self.features]
+        return year, row.reset_index(drop=True)
+
 
     def forecast(self, iso3: str, horizon: int) -> dict | None:
         rows = self.latest(horizon)
